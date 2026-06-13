@@ -118,17 +118,22 @@ export const FAQList: React.FC = () => {
   return (
     <div className="flex flex-col lg:flex-row gap-8">
       <div className="flex-1">
-        <div className="relative mb-8">
-          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <Search size={20} className="text-gray-400" />
+        <div className="mb-8">
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <Search size={20} className="text-gray-400" />
+            </div>
+            <input
+              type="text"
+              className="w-full pl-11 pr-4 py-3 bg-white dark:bg-[#141417] border border-gray-200 dark:border-white/10 rounded-2xl text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition shadow-sm"
+              placeholder="Search FAQs..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
-          <input
-            type="text"
-            className="w-full pl-11 pr-4 py-3 bg-white dark:bg-[#141417] border border-gray-200 dark:border-white/10 rounded-2xl text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition shadow-sm"
-            placeholder="Search FAQs..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+          <p className="text-xs text-gray-500 mt-2 pl-2">
+            💡 Tip: Search for keywords (e.g., "tax", "inflation") rather than full questions for best results.
+          </p>
         </div>
 
         <h3 className="text-xl font-bold mb-2">RTBs & MP2 Investments FAQs</h3>
