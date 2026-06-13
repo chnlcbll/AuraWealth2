@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Flame, Compass, Coins } from 'lucide-react';
 import { cn } from '../utils/cn';
+import { playSound } from '../utils/audio';
 
 export const FIRETargeter = () => {
   const [monthlyExpenses, setMonthlyExpenses] = useState<number>(30000);
@@ -38,7 +39,7 @@ export const FIRETargeter = () => {
           <input
             type="number"
             min="1000"
-            className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
+            className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none transition"
             value={monthlyExpenses || ''}
             onChange={(e) => setMonthlyExpenses(Number(e.target.value))}
           />
@@ -50,20 +51,23 @@ export const FIRETargeter = () => {
           </label>
           <div className="grid grid-cols-3 gap-2">
             <button 
-              onClick={() => handleInstrumentChange('mp2')}
-              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition", instrument === 'mp2' ? "bg-orange-100 dark:bg-orange-500/20 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-500/30" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent")}
+              onMouseEnter={() => playSound('hover')}
+              onClick={() => { playSound('click'); handleInstrumentChange('mp2'); }}
+              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition transform outline-none focus:ring-2 focus:ring-orange-500 hover:scale-105 active:scale-95", instrument === 'mp2' ? "bg-orange-100 dark:bg-orange-500/20 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-500/30 shadow-sm" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent hover:bg-gray-100 dark:hover:bg-white/10")}
             >
               MP2 (Tax-Free)
             </button>
             <button 
-              onClick={() => handleInstrumentChange('tbond')}
-              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition", instrument === 'tbond' ? "bg-orange-100 dark:bg-orange-500/20 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-500/30" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent")}
+              onMouseEnter={() => playSound('hover')}
+              onClick={() => { playSound('click'); handleInstrumentChange('tbond'); }}
+              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition transform outline-none focus:ring-2 focus:ring-orange-500 hover:scale-105 active:scale-95", instrument === 'tbond' ? "bg-orange-100 dark:bg-orange-500/20 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-500/30 shadow-sm" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent hover:bg-gray-100 dark:hover:bg-white/10")}
             >
               RTB (Net Tax)
             </button>
             <button 
-              onClick={() => handleInstrumentChange('custom')}
-              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition", instrument === 'custom' ? "bg-orange-100 dark:bg-orange-500/20 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-500/30" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent")}
+              onMouseEnter={() => playSound('hover')}
+              onClick={() => { playSound('click'); handleInstrumentChange('custom'); }}
+              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition transform outline-none focus:ring-2 focus:ring-orange-500 hover:scale-105 active:scale-95", instrument === 'custom' ? "bg-orange-100 dark:bg-orange-500/20 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-500/30 shadow-sm" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent hover:bg-gray-100 dark:hover:bg-white/10")}
             >
               Custom
             </button>
@@ -77,7 +81,7 @@ export const FIRETargeter = () => {
           <input
             type="number"
             step="0.01"
-            className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
+            className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none transition"
             value={annualRate || ''}
             onChange={(e) => {
               setAnnualRate(Number(e.target.value));

@@ -61,7 +61,7 @@ export const ComparisonChart = () => {
           <input
             type="number"
             min="1000"
-            className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition"
+            className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition"
             value={lumpSum || ''}
             onChange={(e) => setLumpSum(Number(e.target.value))}
           />
@@ -76,7 +76,7 @@ export const ComparisonChart = () => {
                     <input
                         type="number"
                         step="0.1"
-                        className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-3 py-2 font-mono text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition"
+                        className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-3 py-2 font-mono text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition"
                         value={mp2Rate || ''}
                         onChange={(e) => setMp2Rate(Number(e.target.value))}
                     />
@@ -88,7 +88,7 @@ export const ComparisonChart = () => {
                     <input
                         type="number"
                         step="0.1"
-                        className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-3 py-2 font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                        className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-3 py-2 font-mono text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition"
                         value={rtbGrossRate || ''}
                         onChange={(e) => setRtbGrossRate(Number(e.target.value))}
                     />

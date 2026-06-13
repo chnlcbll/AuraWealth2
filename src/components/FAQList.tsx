@@ -125,7 +125,7 @@ export const FAQList: React.FC = () => {
             </div>
             <input
               type="text"
-              className="w-full pl-11 pr-4 py-3 bg-white dark:bg-[#141417] border border-gray-200 dark:border-white/10 rounded-2xl text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition shadow-sm"
+              className="w-full pl-11 pr-4 py-3 bg-white dark:bg-[#141417] border border-gray-200 dark:border-white/10 rounded-2xl text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition shadow-sm"
               placeholder="Search FAQs..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}

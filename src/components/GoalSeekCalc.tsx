@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Target, TrendingUp, Wallet } from 'lucide-react';
 import { cn } from '../utils/cn';
+import { playSound } from '../utils/audio';
 
 export const GoalSeekCalc = () => {
   const [targetAmount, setTargetAmount] = useState<number>(1000000);
@@ -43,20 +44,23 @@ export const GoalSeekCalc = () => {
           </label>
           <div className="grid grid-cols-3 gap-2">
             <button 
-              onClick={() => handleInstrumentChange('mp2')}
-              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition", instrument === 'mp2' ? "bg-fuchsia-100 dark:bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 border border-fuchsia-200 dark:border-fuchsia-500/30" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent")}
+              onMouseEnter={() => playSound('hover')}
+              onClick={() => { playSound('click'); handleInstrumentChange('mp2'); }}
+              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition transform outline-none focus:ring-2 focus:ring-fuchsia-500 hover:scale-105 active:scale-95", instrument === 'mp2' ? "bg-fuchsia-100 dark:bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 border border-fuchsia-200 dark:border-fuchsia-500/30 shadow-sm" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent hover:bg-gray-100 dark:hover:bg-white/10")}
             >
               Pag-IBIG MP2
             </button>
             <button 
-              onClick={() => handleInstrumentChange('tbond')}
-              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition", instrument === 'tbond' ? "bg-fuchsia-100 dark:bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 border border-fuchsia-200 dark:border-fuchsia-500/30" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent")}
+              onMouseEnter={() => playSound('hover')}
+              onClick={() => { playSound('click'); handleInstrumentChange('tbond'); }}
+              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition transform outline-none focus:ring-2 focus:ring-fuchsia-500 hover:scale-105 active:scale-95", instrument === 'tbond' ? "bg-fuchsia-100 dark:bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 border border-fuchsia-200 dark:border-fuchsia-500/30 shadow-sm" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent hover:bg-gray-100 dark:hover:bg-white/10")}
             >
               Treasury Bond
             </button>
             <button 
-              onClick={() => handleInstrumentChange('custom')}
-              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition", instrument === 'custom' ? "bg-fuchsia-100 dark:bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 border border-fuchsia-200 dark:border-fuchsia-500/30" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent")}
+              onMouseEnter={() => playSound('hover')}
+              onClick={() => { playSound('click'); handleInstrumentChange('custom'); }}
+              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition transform outline-none focus:ring-2 focus:ring-fuchsia-500 hover:scale-105 active:scale-95", instrument === 'custom' ? "bg-fuchsia-100 dark:bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 border border-fuchsia-200 dark:border-fuchsia-500/30 shadow-sm" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent hover:bg-gray-100 dark:hover:bg-white/10")}
             >
               Custom
             </button>
@@ -71,7 +75,7 @@ export const GoalSeekCalc = () => {
           <input
             type="number"
             min="1000"
-            className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent outline-none transition"
+            className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:border-fuchsia-500 focus:ring-1 focus:ring-fuchsia-500 outline-none transition"
             value={targetAmount || ''}
             onChange={(e) => setTargetAmount(Number(e.target.value))}
           />
@@ -86,8 +90,9 @@ export const GoalSeekCalc = () => {
             min="1"
             max="30"
             value={years}
-            onChange={(e) => setYears(Number(e.target.value))}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-fuchsia-500"
+            onMouseEnter={() => playSound('hover')}
+            onChange={(e) => { playSound('click'); setYears(Number(e.target.value)); }}
+            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-fuchsia-500 hover:opacity-80 transition"
           />
           <div className="text-right font-mono font-medium text-fuchsia-600 dark:text-fuchsia-400">
             {years} Years
@@ -101,7 +106,7 @@ export const GoalSeekCalc = () => {
           <input
             type="number"
             step="0.01"
-            className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent outline-none transition"
+            className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:border-fuchsia-500 focus:ring-1 focus:ring-fuchsia-500 outline-none transition"
             value={annualRate || ''}
             onChange={(e) => {
               setAnnualRate(Number(e.target.value));
