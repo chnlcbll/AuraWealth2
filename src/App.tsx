@@ -369,10 +369,7 @@ export default function App() {
                     />
 
                     <div className="bg-[#111113] rounded-2xl overflow-hidden shadow-lg border border-black/20">
-                      <video className="w-full aspect-video bg-black object-contain" controls playsInline preload="metadata">
-                        <source src="/videos/borrowing-investing.mp4" type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
+                      <iframe src="https://drive.google.com/file/d/12nxAjoYtxwdqwfmNQmHq0RM7B32WHQIA/preview" className="w-full aspect-video bg-black object-contain border-0" allow="autoplay; fullscreen" />
                       <div className="p-4 bg-white dark:bg-[#1f1f23]">
                         <h4 className="text-gray-800 dark:text-gray-100 font-bold mb-1">Borrowing & Investing: Simple vs Compound</h4>
                         <p className="text-[10px] uppercase tracking-widest font-bold text-teal-600 dark:text-teal-400">GEMATMW review</p>
@@ -380,10 +377,7 @@ export default function App() {
                     </div>
 
                     <div className="bg-[#111113] rounded-2xl overflow-hidden shadow-lg border border-black/20">
-                      <video className="w-full aspect-video bg-black object-contain" controls playsInline preload="metadata">
-                        <source src="/videos/stocks-vs-rtbs.mp4" type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
+                      <iframe src="https://drive.google.com/file/d/182whi4bTsNRIa8zMy9CfZET3TTtVPMUB/preview" className="w-full aspect-video bg-black object-contain border-0" allow="autoplay; fullscreen" />
                       <div className="p-4 bg-white dark:bg-[#1f1f23]">
                         <h4 className="text-gray-800 dark:text-gray-100 font-bold mb-1">Stocks vs. RTBs: The True Math</h4>
                         <p className="text-[10px] uppercase tracking-widest font-bold text-teal-600 dark:text-teal-400">GEMATMW review</p>
@@ -391,10 +385,7 @@ export default function App() {
                     </div>
 
                     <div className="bg-[#111113] rounded-2xl overflow-hidden shadow-lg border border-black/20">
-                      <video className="w-full aspect-video bg-black object-contain" controls playsInline preload="metadata">
-                        <source src="/videos/dual-power.mp4" type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
+                      <iframe src="https://drive.google.com/file/d/1GcIGpkJUHov9e9v1WrJHpkl6e5Qxn8GD/preview" className="w-full aspect-video bg-black object-contain border-0" allow="autoplay; fullscreen" />
                       <div className="p-4 bg-white dark:bg-[#1f1f23]">
                         <h4 className="text-gray-800 dark:text-gray-100 font-bold mb-1">The Dual Power of Interest</h4>
                         <p className="text-[10px] uppercase tracking-widest font-bold text-teal-600 dark:text-teal-400">GEMATMW review</p>

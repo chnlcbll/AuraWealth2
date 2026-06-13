@@ -4,10 +4,14 @@ AuraWealth is a premium, interactive financial planner and investment companion 
 
 ## 📸 Preview
 
-![AuraWealth Dashboard](https://placehold.co/800x450/1f2937/a855f7?text=AuraWealth+Dashboard)
-![Goal-Seek Calculator](https://placehold.co/800x450/1f2937/10b981?text=Goal-Seek+Calculator)
+### Dashboard
+![AuraWealth Dashboard](https://drive.google.com/uc?export=view&id=1fPQqEGE2762R2OQm_9oBuJZz4SW9RN0S)
 
-*(Note: Replace the placeholder URLs above with screenshots of your actual application after deploying!)*
+### Analysis Tab
+![Analysis Tab](https://drive.google.com/uc?export=view&id=1fj-xgmUaIKvQfwgnurze6RP66cqqubNV)
+
+### Goal-Seek Tab
+![Goal-Seek Tab](https://drive.google.com/uc?export=view&id=1PJp4JnSwwYRygW2N0w49Z6hTyi7ZkmcK)
 
 ## ✨ Features
 
