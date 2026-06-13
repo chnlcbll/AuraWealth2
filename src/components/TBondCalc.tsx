@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react';
-import { motion } from 'motion/react';
+import React, { useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { TBondInput } from '../types';
 import { calculateTBond } from '../utils/calculations';
 import { Tooltip } from './Tooltip';
-import { Info } from 'lucide-react';
+import { Info, Table as TableIcon } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 
 import { triggerFlyingDollars } from './FlyingIcons';
@@ -17,6 +17,7 @@ interface Props {
 
 export const TBondCalc: React.FC<Props> = ({ input, setInput }) => {
   const result = useMemo(() => calculateTBond(input), [input]);
+  const [showTable, setShowTable] = useState(false);
 
   const handlePrincipalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput({...input, principal: Number(e.target.value)});
@@ -219,6 +220,58 @@ export const TBondCalc: React.FC<Props> = ({ input, setInput }) => {
           </ResponsiveContainer>
         </div>
       </div>
+
+      <div className="flex justify-center pt-2">
+        <button
+          onClick={() => setShowTable(!showTable)}
+          className="flex items-center gap-2 text-sm font-bold text-gray-600 hover:text-teal-500 dark:text-gray-400 dark:hover:text-teal-400 transition-colors bg-white hover:bg-teal-50 dark:bg-[#1f1f23] dark:hover:bg-teal-500/10 px-4 py-2 rounded-xl border border-black/10 dark:border-white/10"
+        >
+          <TableIcon size={16} />
+          {showTable ? 'Hide' : 'View'} Detailed Breakdown Table
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {showTable && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="overflow-x-auto bg-white dark:bg-[#141417] border border-black/10 dark:border-white/10 rounded-2xl shadow-sm mt-4">
+              <table className="w-full text-left text-sm">
+                <thead>
+                  <tr className="border-b border-black/10 dark:border-white/10 bg-black/5 dark:bg-black/40 text-[10px] uppercase tracking-widest text-gray-500 font-bold">
+                    <th className="px-4 py-4 whitespace-nowrap">Year</th>
+                    <th className="px-4 py-4 whitespace-nowrap">Principal</th>
+                    <th className="px-4 py-4 whitespace-nowrap">Accumulated Interest</th>
+                    <th className="px-4 py-4 whitespace-nowrap text-right">Total Value</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-black/5 dark:divide-white/5 font-mono">
+                  {result.projection.map((row, index) => (
+                    <tr key={index} className="hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                      <td className="px-4 py-3 text-gray-800 dark:text-gray-300">
+                        {row.year === 0 ? 'Start' : `Year ${row.year}`}
+                      </td>
+                      <td className="px-4 py-3 text-gray-600 dark:text-gray-400">
+                        ₱{row.totalValue.toLocaleString(undefined, {minimumFractionDigits: 2})}
+                      </td>
+                      <td className="px-4 py-3 text-emerald-600 dark:text-teal-400 font-medium">
+                        {row.accumulatedIncome > 0 ? '+' : ''}₱{row.accumulatedIncome.toLocaleString(undefined, {minimumFractionDigits: 2})}
+                      </td>
+                      <td className="px-4 py-3 font-bold text-gray-900 dark:text-white text-right">
+                        ₱{(row.totalValue + row.accumulatedIncome).toLocaleString(undefined, {minimumFractionDigits: 2})}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };

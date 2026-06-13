@@ -22,7 +22,7 @@ const investmentFaqs = [
   { question: "Can I have multiple MP2 accounts?", answer: "Yes! You can open multiple MP2 accounts for different financial goals with different tenors overlapping." },
   { question: "Where do I buy RTBs?", answer: "RTBs can be purchased through authorized selling banks or online via the Bureau of the Treasury’s portal or apps like Bonds.PH." },
   { question: "Where do I open an MP2 account?", answer: "You can open an MP2 account online via Virtual Pag-IBIG or at any Pag-IBIG branch." },
-  { question: "Is there a maximum limit for MP2?", answer: "There is no limit to how much you can invest in MP2. However, a one-time deposit exceeding ₱500,000 requires payment via Manager's or Cashier's Check." },
+  { question: "Is there a maximum limit for MP2?", answer: "Yes. They recently added a ₱20,000,000 limit per person. No matter how many accounts that person has, the total combined MP2 savings should not exceed ₱20M. However, a one-time deposit exceeding ₱500,000 still requires payment via Manager's or Cashier's Check." },
   { question: "Is there a limit for RTB investments?", answer: "There's generally no maximum limit, subject to the availability of the bond issuance." },
   { question: "Are the rates guaranteed for MP2?", answer: "No, MP2 dividend rates are not fixed. They depend on Pag-IBIG's annual net income, though they historically perform well (around 6-7%)." },
   { question: "Are RTB rates guaranteed?", answer: "Yes, the coupon rate assigned during the offering schedule is fixed for the life of the bond." },
@@ -44,7 +44,9 @@ const websiteFaqs = [
   { question: "Is AuraWealth an official government site?", answer: "No, we are an independent tool created to assist retail investors and are not officially affiliated with Pag-IBIG or the Bureau of the Treasury." },
   { question: "How do I restart the interactive walkthrough?", answer: "The walkthrough runs on your first login. You can logout and login again to replay the walkthrough. Alternatively, you can always refer back to our Video Guides in this Help tab or click the small 'skip' button during the walkthrough to bypass it." },
   { question: "Can I mute the sound effects?", answer: "Yes, you can click the speaker icon next to the Theme toggle on the top right navigation bar to mute or unmute the interface sound effects." },
-  { question: "Is it mobile friendly?", answer: "Yes! AuraWealth is designed to resize beautifully whether you're using a phone, tablet, or desktop monitor." }
+  { question: "Is it mobile friendly?", answer: "Yes! AuraWealth is designed to resize beautifully whether you're using a phone, tablet, or desktop monitor." },
+  { question: "How does the Detailed Growth Table work?", answer: "The Detailed Growth Table breaks down your compound interest year-by-year. It shows your exact principal, dividends earned for that year, and the new ending balance so you can see the math step-by-step." },
+  { question: "Can I export the Year-by-Year Growth Table?", answer: "Yes, when you save a calculation, the yearly breakdown is included in the underlying data and can be seen on the PDF report." }
 ];
 
 export const FAQList: React.FC = () => {
