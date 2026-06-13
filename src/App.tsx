@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { TBondInput, MP2Input, SavedCalculation } from './types';
+import { TBondInput, MP2Input, SavedCalculation, GoalSeekInput, FIREInput, CompareInput } from './types';
 import { TBondCalc } from './components/TBondCalc';
 import { MP2Calc } from './components/MP2Calc';
 import { Sidebar } from './components/Sidebar';
@@ -58,6 +58,26 @@ export default function App() {
     inflationRate: 4
   });
 
+  const [goalSeekInput, setGoalSeekInput] = useState<GoalSeekInput>({
+    targetAmount: 1000000,
+    years: 5,
+    instrument: 'mp2',
+    annualRate: 6.5
+  });
+
+  const [fireInput, setFireInput] = useState<FIREInput>({
+    monthlyExpenses: 30000,
+    instrument: 'mp2',
+    annualRate: 6.5
+  });
+
+  const [compareInput, setCompareInput] = useState<CompareInput>({
+    lumpSum: 500000,
+    years: 5,
+    mp2Rate: 6.5,
+    rtbGrossRate: 6.25
+  });
+
   useEffect(() => {
     setIsReady(true);
     if (!introSeen) {
@@ -93,7 +113,11 @@ export default function App() {
       name: `Calculation ${savedItems.length + 1}`,
       type: activeTab,
       createdAt: new Date().toISOString(),
-      ...(activeTab === 'tbond' ? { tbondInput } : { mp2Input })
+      ...(activeTab === 'tbond' ? { tbondInput } : 
+         activeTab === 'mp2' ? { mp2Input } : 
+         activeTab === 'goalseek' ? { goalSeekInput } :
+         activeTab === 'fire' ? { fireInput } : 
+         activeTab === 'compare' ? { compareInput } : {})
     };
     setSavedItems([newSave, ...savedItems]);
     setSidebarOpen(true);
@@ -105,6 +129,9 @@ export default function App() {
     setActiveTab(item.type);
     if (item.type === 'tbond' && item.tbondInput) setTbondInput(item.tbondInput);
     if (item.type === 'mp2' && item.mp2Input) setMp2Input(item.mp2Input);
+    if (item.type === 'goalseek' && item.goalSeekInput) setGoalSeekInput(item.goalSeekInput);
+    if (item.type === 'fire' && item.fireInput) setFireInput(item.fireInput);
+    if (item.type === 'compare' && item.compareInput) setCompareInput(item.compareInput);
   };
 
   const handleDelete = (id: string) => {
@@ -275,8 +302,7 @@ export default function App() {
                   
                   <button 
                     onClick={handleSave}
-                    disabled={activeTab === 'goalseek' || activeTab === 'fire' || activeTab === 'compare'}
-                    className={cn("w-full xl:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-black dark:bg-teal-500 text-white dark:text-black rounded-xl text-sm font-bold shadow-lg transition transform shrink-0", (activeTab === 'goalseek' || activeTab === 'fire' || activeTab === 'compare') ? "opacity-50 cursor-not-allowed" : "hover:opacity-90 hover:scale-105 active:scale-95 dark:shadow-teal-500/10")}
+                    className={cn("w-full xl:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-black dark:bg-teal-500 text-white dark:text-black rounded-xl text-sm font-bold shadow-lg transition transform shrink-0 hover:opacity-90 hover:scale-105 active:scale-95 dark:shadow-teal-500/10")}
                   >
                     <Save size={16} /> Save Snapshot
                   </button>
@@ -293,15 +319,15 @@ export default function App() {
                     </motion.div>
                   ) : activeTab === 'compare' ? (
                     <motion.div key="compare" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
-                      <ComparisonChart />
+                      <ComparisonChart input={compareInput} setInput={setCompareInput} />
                     </motion.div>
                   ) : activeTab === 'fire' ? (
                     <motion.div key="fire" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
-                      <FIRETargeter />
+                      <FIRETargeter input={fireInput} setInput={setFireInput} />
                     </motion.div>
                   ) : (
                     <motion.div key="goalseek" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
-                      <GoalSeekCalc />
+                      <GoalSeekCalc input={goalSeekInput} setInput={setGoalSeekInput} />
                     </motion.div>
                   )}
                 </AnimatePresence>

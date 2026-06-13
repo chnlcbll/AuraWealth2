@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Flame, Compass, Coins } from 'lucide-react';
 import { cn } from '../utils/cn';
 import { playSound } from '../utils/audio';
+import { FIREInput } from '../types';
 
-export const FIRETargeter = () => {
-  const [monthlyExpenses, setMonthlyExpenses] = useState<number>(30000);
-  const [instrument, setInstrument] = useState<'mp2' | 'tbond' | 'custom'>('mp2');
-  const [annualRate, setAnnualRate] = useState<number>(6.5);
+interface FIRETargeterProps {
+  input: FIREInput;
+  setInput: (input: FIREInput) => void;
+}
+
+export const FIRETargeter = ({ input, setInput }: FIRETargeterProps) => {
+  const { monthlyExpenses, instrument, annualRate } = input;
 
   const handleInstrumentChange = (mode: 'mp2' | 'tbond' | 'custom') => {
-    setInstrument(mode);
-    if (mode === 'mp2') setAnnualRate(6.5);
+    let newRate = annualRate;
+    if (mode === 'mp2') newRate = 6.5;
     // Note: RTB interest in PH is subject to 20% final withholding tax. 
     // Net yield = 6.25% * 0.8 = 5% for calculation purposes, or let's use gross or specify to the user.
     // We will use 5% net for RTB here.
-    if (mode === 'tbond') setAnnualRate(5.0); 
+    if (mode === 'tbond') newRate = 5.0; 
+    setInput({ ...input, instrument: mode, annualRate: newRate });
   };
 
   const rateDec = annualRate / 100;
@@ -41,7 +46,7 @@ export const FIRETargeter = () => {
             min="1000"
             className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none transition"
             value={monthlyExpenses || ''}
-            onChange={(e) => setMonthlyExpenses(Number(e.target.value))}
+            onChange={(e) => setInput({ ...input, monthlyExpenses: Number(e.target.value) })}
           />
         </div>
 
@@ -84,8 +89,7 @@ export const FIRETargeter = () => {
             className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none transition"
             value={annualRate || ''}
             onChange={(e) => {
-              setAnnualRate(Number(e.target.value));
-              setInstrument('custom');
+              setInput({ ...input, annualRate: Number(e.target.value), instrument: 'custom' });
             }}
           />
           {instrument === 'tbond' && (

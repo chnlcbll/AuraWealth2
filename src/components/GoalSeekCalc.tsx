@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Target, TrendingUp, Wallet } from 'lucide-react';
 import { cn } from '../utils/cn';
 import { playSound } from '../utils/audio';
+import { GoalSeekInput } from '../types';
 
-export const GoalSeekCalc = () => {
-  const [targetAmount, setTargetAmount] = useState<number>(1000000);
-  const [years, setYears] = useState<number>(5);
-  const [instrument, setInstrument] = useState<'mp2' | 'tbond' | 'custom'>('mp2');
-  const [annualRate, setAnnualRate] = useState<number>(6.5);
+interface GoalSeekCalcProps {
+  input: GoalSeekInput;
+  setInput: (input: GoalSeekInput) => void;
+}
+
+export const GoalSeekCalc = ({ input, setInput }: GoalSeekCalcProps) => {
+  const { targetAmount, years, instrument, annualRate } = input;
   
   // Future Value (FV) = PV * (1 + r)^n
   // -> PV = FV / (1 + r)^n
@@ -22,9 +25,10 @@ export const GoalSeekCalc = () => {
   const monthlyRequired = targetAmount / ( (Math.pow(1 + monthlyRateDec, months) - 1) / monthlyRateDec );
 
   const handleInstrumentChange = (mode: 'mp2' | 'tbond' | 'custom') => {
-    setInstrument(mode);
-    if (mode === 'mp2') setAnnualRate(6.5);
-    if (mode === 'tbond') setAnnualRate(6.25);
+    let newRate = annualRate;
+    if (mode === 'mp2') newRate = 6.5;
+    if (mode === 'tbond') newRate = 6.25;
+    setInput({ ...input, instrument: mode, annualRate: newRate });
   };
 
   return (
@@ -77,7 +81,7 @@ export const GoalSeekCalc = () => {
             min="1000"
             className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:border-fuchsia-500 focus:ring-1 focus:ring-fuchsia-500 outline-none transition"
             value={targetAmount || ''}
-            onChange={(e) => setTargetAmount(Number(e.target.value))}
+            onChange={(e) => setInput({ ...input, targetAmount: Number(e.target.value) })}
           />
         </div>
 
@@ -91,7 +95,7 @@ export const GoalSeekCalc = () => {
             max="30"
             value={years}
             onMouseEnter={() => playSound('hover')}
-            onChange={(e) => { playSound('click'); setYears(Number(e.target.value)); }}
+            onChange={(e) => { playSound('click'); setInput({ ...input, years: Number(e.target.value) }); }}
             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-fuchsia-500 hover:opacity-80 transition"
           />
           <div className="text-right font-mono font-medium text-fuchsia-600 dark:text-fuchsia-400">
@@ -109,8 +113,7 @@ export const GoalSeekCalc = () => {
             className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:border-fuchsia-500 focus:ring-1 focus:ring-fuchsia-500 outline-none transition"
             value={annualRate || ''}
             onChange={(e) => {
-              setAnnualRate(Number(e.target.value));
-              setInstrument('custom');
+              setInput({ ...input, annualRate: Number(e.target.value), instrument: 'custom' });
             }}
           />
         </div>

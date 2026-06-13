@@ -21,12 +21,35 @@ export interface MP2Input extends BaseInput {
   tenor: 5 | 10;
 }
 
+export interface GoalSeekInput {
+  targetAmount: number;
+  years: number;
+  instrument: 'mp2' | 'tbond' | 'custom';
+  annualRate: number;
+}
+
+export interface FIREInput {
+  monthlyExpenses: number;
+  instrument: 'mp2' | 'tbond' | 'custom';
+  annualRate: number;
+}
+
+export interface CompareInput {
+  lumpSum: number;
+  years: number;
+  mp2Rate: number;
+  rtbGrossRate: number;
+}
+
 export interface SavedCalculation {
   id: string;
   name: string;
-  type: 'tbond' | 'mp2';
+  type: 'tbond' | 'mp2' | 'goalseek' | 'fire' | 'compare';
   tbondInput?: TBondInput;
   mp2Input?: MP2Input;
+  goalSeekInput?: GoalSeekInput;
+  fireInput?: FIREInput;
+  compareInput?: CompareInput;
   createdAt: string;
 }
 

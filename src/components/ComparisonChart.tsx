@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BarChart as BarChartIcon, Trophy, AlertTriangle } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, CartesianGrid, Legend } from 'recharts';
 import { cn } from '../utils/cn';
+import { CompareInput } from '../types';
+import { playSound } from '../utils/audio';
 
-export const ComparisonChart = () => {
-  const [lumpSum, setLumpSum] = useState<number>(500000);
-  const [years, setYears] = useState<number>(5);
-  const [mp2Rate, setMp2Rate] = useState<number>(6.5);
-  const [rtbGrossRate, setRtbGrossRate] = useState<number>(6.25);
+interface ComparisonChartProps {
+  input: CompareInput;
+  setInput: (input: CompareInput) => void;
+}
+
+export const ComparisonChart = ({ input, setInput }: ComparisonChartProps) => {
+  const { lumpSum, years, mp2Rate, rtbGrossRate } = input;
 
   const rtbNetRate = rtbGrossRate * 0.8; // 20% withholding tax
 
@@ -63,7 +67,7 @@ export const ComparisonChart = () => {
             min="1000"
             className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition"
             value={lumpSum || ''}
-            onChange={(e) => setLumpSum(Number(e.target.value))}
+            onChange={(e) => setInput({ ...input, lumpSum: Number(e.target.value) })}
           />
         </div>
 
@@ -78,7 +82,7 @@ export const ComparisonChart = () => {
                         step="0.1"
                         className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-3 py-2 font-mono text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition"
                         value={mp2Rate || ''}
-                        onChange={(e) => setMp2Rate(Number(e.target.value))}
+                        onChange={(e) => setInput({ ...input, mp2Rate: Number(e.target.value) })}
                     />
                 </div>
                 <div className="space-y-2">
@@ -90,7 +94,7 @@ export const ComparisonChart = () => {
                         step="0.1"
                         className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-3 py-2 font-mono text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition"
                         value={rtbGrossRate || ''}
-                        onChange={(e) => setRtbGrossRate(Number(e.target.value))}
+                        onChange={(e) => setInput({ ...input, rtbGrossRate: Number(e.target.value) })}
                     />
                 </div>
             </div>
@@ -104,7 +108,7 @@ export const ComparisonChart = () => {
                 min="1"
                 max="10"
                 value={years}
-                onChange={(e) => setYears(Number(e.target.value))}
+                onChange={(e) => setInput({ ...input, years: Number(e.target.value) })}
                 className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-500"
               />
               <div className="text-right font-mono font-medium text-indigo-600 dark:text-indigo-400">

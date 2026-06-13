@@ -118,7 +118,13 @@ export const Sidebar: React.FC<Props> = ({
                       )}
                     </div>
                     <div className="text-[10px] text-gray-500 uppercase tracking-widest flex justify-between">
-                      <span>{item.type === 'tbond' ? 'Treasury Bond' : 'Pag-IBIG MP2'}</span>
+                      <span>{
+                        item.type === 'tbond' ? 'Treasury Bond' : 
+                        item.type === 'mp2' ? 'Pag-IBIG MP2' :
+                        item.type === 'goalseek' ? 'Goal Seek' :
+                        item.type === 'fire' ? 'F.I.R.E. Targeter' :
+                        item.type === 'compare' ? 'RTB vs MP2' : 'Unknown'
+                      }</span>
                       <span>{new Date(item.createdAt).toLocaleDateString()}</span>
                     </div>
                   </div>
