@@ -36,8 +36,8 @@ export const TBondCalc: React.FC<Props> = ({ input, setInput }) => {
         {/* Inputs */}
         <div className="space-y-2">
           <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold flex items-center justify-between">
-            Principal Amount (PHP)
-            <Tooltip content="The total investment amount" position="top-right"><span className="text-teal-500 cursor-help">?</span></Tooltip>
+            <span className="flex items-center gap-2">Principal Amount (PHP) <Tooltip content="The total investment amount" position="top-right"><span className="text-teal-500 cursor-help">?</span></Tooltip></span>
+            {input.principal > 0 && <span className="text-teal-500 font-mono text-xs ml-2">₱{input.principal.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>}
           </label>
           <input 
             type="number" 

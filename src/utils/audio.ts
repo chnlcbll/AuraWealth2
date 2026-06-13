@@ -27,7 +27,7 @@ const getContext = () => {
   return audioCtx;
 };
 
-export const playSound = (type: 'click' | 'hover' | 'success' | 'save' | 'coin' = 'click') => {
+export const playSound = (type: 'click' | 'hover' | 'success' | 'save' | 'coin' | 'keystroke' = 'click') => {
   if (isMuted) return;
   try {
     const ctx = getContext();
@@ -62,6 +62,13 @@ export const playSound = (type: 'click' | 'hover' | 'success' | 'save' | 'coin' 
       gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
       osc.start(now);
       osc.stop(now + 0.1);
+    } else if (type === 'keystroke') {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(Math.random() * 200 + 400, now);
+      gainNode.gain.setValueAtTime(0.05, now);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+      osc.start(now);
+      osc.stop(now + 0.05);
     } else if (type === 'success' || type === 'save') {
       osc.type = 'sine';
       osc.frequency.setValueAtTime(400, now);

@@ -49,7 +49,8 @@ export const MP2Calc: React.FC<Props> = ({ input, setInput }) => {
         {input.mode === 'one-time' ? (
           <div className="space-y-2">
             <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold flex items-center justify-between">
-              Principal Amount (PHP)
+              <span>Principal Amount (PHP)</span>
+              {input.principal > 0 && <span className="text-teal-500 font-mono text-xs ml-2">₱{input.principal.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>}
             </label>
             <input 
               type="number" 
@@ -64,7 +65,8 @@ export const MP2Calc: React.FC<Props> = ({ input, setInput }) => {
         ) : (
           <div className="space-y-2">
             <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold flex items-center justify-between">
-              Monthly Contribution (PHP)
+              <span>Monthly Contribution (PHP)</span>
+              {input.monthly > 0 && <span className="text-teal-500 font-mono text-xs ml-2">₱{input.monthly.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>}
             </label>
             <input 
               type="number" 

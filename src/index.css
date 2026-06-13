@@ -119,3 +119,21 @@ a, button, input[type="range"], select, .cursor-pointer {
   flex-wrap: wrap !important;
   gap: 0.5rem !important;
 }
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes keystroke-pop {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.02); filter: brightness(1.1); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+.animate-keystroke {
+  animation: keystroke-pop 0.1s ease-out;
+}

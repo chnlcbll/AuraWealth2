@@ -8,7 +8,7 @@ import { MOCK_MESSAGES } from '../data/messages';
 
 interface Props {
   savedItems: SavedCalculation[];
-  onNavigate: (view: 'tbond' | 'mp2') => void;
+  onNavigate: (view: 'tbond' | 'mp2' | 'goalseek' | 'fire' | 'compare') => void;
   onLoad: (item: SavedCalculation) => void;
   username: string;
 }
@@ -100,7 +100,7 @@ export const Dashboard: React.FC<Props> = ({ savedItems, onNavigate, onLoad, use
               <Calculator className="text-teal-500"/>
               Create New Projection
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <button 
                 id="tour-rtb-btn"
                 onClick={() => { playSound(); onNavigate('tbond'); }}
@@ -109,8 +109,8 @@ export const Dashboard: React.FC<Props> = ({ savedItems, onNavigate, onLoad, use
                 <div className="w-16 h-16 bg-blue-50 dark:bg-black/40 border border-blue-100 dark:border-white/5 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-inner">
                   <Landmark className="text-blue-600 dark:text-blue-400" size={28} />
                 </div>
-                <h4 className="font-bold text-gray-900 dark:text-white">Retail Treasury Bonds (RTB)</h4>
-                <p className="text-xs text-gray-500 mt-2 text-center">Quarterly Fixed Income</p>
+                <h4 className="font-bold text-[13px] text-gray-900 dark:text-white">Treasury Bonds</h4>
+                <p className="text-[10px] text-gray-500 mt-2 text-center uppercase tracking-widest font-bold">Quarterly Payouts</p>
               </button>
               <button 
                 id="tour-mp2-btn"
@@ -120,8 +120,29 @@ export const Dashboard: React.FC<Props> = ({ savedItems, onNavigate, onLoad, use
                 <div className="w-16 h-16 bg-emerald-50 dark:bg-black/40 border border-emerald-100 dark:border-white/5 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-inner">
                   <PiggyBank className="text-emerald-600 dark:text-teal-400" size={28} />
                 </div>
-                <h4 className="font-bold text-gray-900 dark:text-white">Pag-IBIG MP2</h4>
-                <p className="text-xs text-gray-500 mt-2 text-center">Tax-free Compound Growth</p>
+                <h4 className="font-bold text-[13px] text-gray-900 dark:text-white">Pag-IBIG MP2</h4>
+                <p className="text-[10px] text-gray-500 mt-2 text-center uppercase tracking-widest font-bold">Tax-free Compound</p>
+              </button>
+              <button 
+                onClick={() => { playSound(); onNavigate('compare'); }}
+                className="flex flex-col items-center justify-center p-6 bg-white dark:bg-[#141417] rounded-2xl hover:border-indigo-500 dark:hover:border-indigo-500 border border-transparent transition-all group shadow-sm dark:shadow-none"
+              >
+                <div className="w-16 h-16 bg-indigo-50 dark:bg-black/40 border border-indigo-100 dark:border-white/5 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-inner">
+                  <ArrowRight className="text-indigo-600 dark:text-indigo-400" size={24} />
+                  <ArrowRight className="text-indigo-600 dark:text-indigo-400 rotate-180 -ml-2" size={24} />
+                </div>
+                <h4 className="font-bold text-[13px] text-gray-900 dark:text-white">RTB vs. MP2</h4>
+                <p className="text-[10px] text-gray-500 mt-2 text-center uppercase tracking-widest font-bold">Visual Showdown</p>
+              </button>
+              <button 
+                onClick={() => { playSound(); onNavigate('fire'); }}
+                className="flex flex-col items-center justify-center p-6 bg-white dark:bg-[#141417] rounded-2xl hover:border-orange-500 dark:hover:border-orange-500 border border-transparent transition-all group shadow-sm dark:shadow-none"
+              >
+                <div className="w-16 h-16 bg-orange-50 dark:bg-black/40 border border-orange-100 dark:border-white/5 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-inner">
+                  <PieChart className="text-orange-600 dark:text-orange-400" size={28} />
+                </div>
+                <h4 className="font-bold text-[13px] text-gray-900 dark:text-white">F.I.R.E. Targeter</h4>
+                <p className="text-[10px] text-gray-500 mt-2 text-center uppercase tracking-widest font-bold">Live Off Dividends</p>
               </button>
             </div>
           </div>

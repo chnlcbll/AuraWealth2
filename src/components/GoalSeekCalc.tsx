@@ -31,7 +31,7 @@ export const GoalSeekCalc = () => {
       {/* Input Section */}
       <div className="flex-1 bg-white dark:bg-[#1a1a1e] rounded-3xl shadow-xl border border-gray-100 dark:border-white/5 p-6 space-y-6">
         <h2 className="text-xl font-bold flex items-center gap-2">
-          <Target className="text-purple-500" /> Goal-Seek Calculator
+          <Target className="text-fuchsia-500" /> Goal-Seek Calculator
         </h2>
         <p className="text-sm text-gray-500 dark:text-gray-400">
           Reverse-engineer your investments for both MP2, Treasury Bonds, or any custom instrument. Tell us your target, and we'll tell you how much to deposit.
@@ -44,19 +44,19 @@ export const GoalSeekCalc = () => {
           <div className="grid grid-cols-3 gap-2">
             <button 
               onClick={() => handleInstrumentChange('mp2')}
-              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition", instrument === 'mp2' ? "bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-500/30" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent")}
+              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition", instrument === 'mp2' ? "bg-fuchsia-100 dark:bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 border border-fuchsia-200 dark:border-fuchsia-500/30" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent")}
             >
               Pag-IBIG MP2
             </button>
             <button 
               onClick={() => handleInstrumentChange('tbond')}
-              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition", instrument === 'tbond' ? "bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-500/30" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent")}
+              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition", instrument === 'tbond' ? "bg-fuchsia-100 dark:bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 border border-fuchsia-200 dark:border-fuchsia-500/30" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent")}
             >
               Treasury Bond
             </button>
             <button 
               onClick={() => handleInstrumentChange('custom')}
-              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition", instrument === 'custom' ? "bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-500/30" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent")}
+              className={cn("py-2 px-3 rounded-xl text-xs font-bold transition", instrument === 'custom' ? "bg-fuchsia-100 dark:bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 border border-fuchsia-200 dark:border-fuchsia-500/30" : "bg-gray-50 dark:bg-white/5 text-gray-500 border border-transparent")}
             >
               Custom
             </button>
@@ -65,12 +65,13 @@ export const GoalSeekCalc = () => {
 
         <div className="space-y-2">
           <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold flex items-center justify-between">
-            Target Goal (PHP)
+            <span>Target Goal (PHP)</span>
+            {targetAmount > 0 && <span className="text-fuchsia-500 font-mono text-xs ml-2">₱{targetAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>}
           </label>
           <input
             type="number"
             min="1000"
-            className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
+            className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent outline-none transition"
             value={targetAmount || ''}
             onChange={(e) => setTargetAmount(Number(e.target.value))}
           />
@@ -86,9 +87,9 @@ export const GoalSeekCalc = () => {
             max="30"
             value={years}
             onChange={(e) => setYears(Number(e.target.value))}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-purple-500"
+            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-fuchsia-500"
           />
-          <div className="text-right font-mono font-medium text-purple-600 dark:text-purple-400">
+          <div className="text-right font-mono font-medium text-fuchsia-600 dark:text-fuchsia-400">
             {years} Years
           </div>
         </div>
@@ -100,7 +101,7 @@ export const GoalSeekCalc = () => {
           <input
             type="number"
             step="0.01"
-            className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
+            className="w-full bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent outline-none transition"
             value={annualRate || ''}
             onChange={(e) => {
               setAnnualRate(Number(e.target.value));
@@ -112,7 +113,7 @@ export const GoalSeekCalc = () => {
 
       {/* Output Section */}
       <div className="flex-1 space-y-6">
-        <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-3xl p-8 text-white shadow-lg relative overflow-hidden">
+        <div className="bg-gradient-to-br from-fuchsia-500 to-rose-600 rounded-3xl p-8 text-white shadow-lg relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
           
           <h3 className="text-sm font-medium opacity-90 uppercase tracking-widest mb-2 flex items-center gap-2">

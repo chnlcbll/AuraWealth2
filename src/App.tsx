@@ -12,6 +12,8 @@ import { Login } from './components/Login';
 import { IntroTour } from './components/IntroTour';
 import { SimulatedVideo, VideoSlide } from './components/SimulatedVideo';
 import { GoalSeekCalc } from './components/GoalSeekCalc';
+import { FIRETargeter } from './components/FIRETargeter';
+import { ComparisonChart } from './components/ComparisonChart';
 import { FlyingIconsProvider } from './components/FlyingIcons';
 import { generatePDF } from './utils/pdfExport';
 import { playSound, toggleMute, getMuteState } from './utils/audio';
@@ -27,7 +29,7 @@ export default function App() {
   const [savedItems, setSavedItems] = useLocalStorage<SavedCalculation[]>('saved_calculations', []);
   
   const [appView, setAppView] = useState<'dashboard' | 'calculator'>('dashboard');
-  const [activeTab, setActiveTab] = useState<'tbond' | 'mp2' | 'goalseek'>('tbond');
+  const [activeTab, setActiveTab] = useState<'tbond' | 'mp2' | 'goalseek' | 'compare' | 'fire'>('tbond');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [helpTab, setHelpTab] = useState<'faq' | 'video'>('faq');
@@ -61,6 +63,21 @@ export default function App() {
     if (!introSeen) {
         playSound('success');
     }
+
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLInputElement | HTMLTextAreaElement;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
+        const type = target.getAttribute('type');
+        if (type === 'radio' || type === 'checkbox' || type === 'range') return;
+        playSound('keystroke');
+        target.classList.remove('animate-keystroke');
+        void target.offsetWidth; // trigger reflow
+        target.classList.add('animate-keystroke');
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
   }, [introSeen]);
 
   // Handle Theme
@@ -209,47 +226,55 @@ export default function App() {
               />
             ) : (
               <>
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
-                  <div className="flex bg-gray-200 dark:bg-black/40 rounded-xl p-1 w-full sm:w-auto">
+                <div className="flex flex-col xl:flex-row items-center justify-between gap-4 mb-8">
+                  <div className="flex bg-gray-200 dark:bg-black/40 rounded-xl p-1 w-full xl:w-auto overflow-x-auto hide-scrollbar">
                     <button 
                       onClick={() => { playSound('hover'); setActiveTab('tbond'); }}
-                      className={cn("flex-1 sm:flex-none px-6 py-2 rounded-lg text-xs uppercase tracking-widest font-bold transition", 
-                        activeTab === 'tbond' ? "bg-white dark:bg-white/5 dark:text-teal-400 border dark:border-teal-500/30 shadow" : "hover:bg-white/50 dark:hover:bg-white/5 text-gray-500 border border-transparent"
+                      className={cn("whitespace-nowrap flex-1 sm:flex-none px-6 py-2 rounded-lg text-xs uppercase tracking-widest font-bold transition", 
+                        activeTab === 'tbond' ? "bg-white dark:bg-white/5 dark:text-blue-400 border dark:border-blue-500/30 shadow" : "hover:bg-white/50 dark:hover:bg-white/5 text-gray-500 border border-transparent"
                       )}
                     >
                       Retail Treasury Bonds (RTBs)
                     </button>
                     <button 
                       onClick={() => { playSound('hover'); setActiveTab('mp2'); }}
-                      className={cn("flex-1 sm:flex-none px-6 py-2 rounded-lg text-xs uppercase tracking-widest font-bold transition", 
+                      className={cn("whitespace-nowrap flex-1 sm:flex-none px-6 py-2 rounded-lg text-xs uppercase tracking-widest font-bold transition", 
                         activeTab === 'mp2' ? "bg-white dark:bg-white/5 dark:text-teal-400 border dark:border-teal-500/30 shadow" : "hover:bg-white/50 dark:hover:bg-white/5 text-gray-500 border border-transparent"
                       )}
                     >
                       Pag-IBIG MP2
                     </button>
                     <button 
+                      onClick={() => { playSound('hover'); setActiveTab('compare'); }}
+                      className={cn("whitespace-nowrap flex-1 sm:flex-none px-6 py-2 rounded-lg text-xs uppercase tracking-widest font-bold transition", 
+                        activeTab === 'compare' ? "bg-white dark:bg-white/5 dark:text-indigo-400 border dark:border-indigo-500/30 shadow text-indigo-600" : "hover:bg-white/50 dark:hover:bg-white/5 text-gray-500 border border-transparent"
+                      )}
+                    >
+                      RTB vs MP2
+                    </button>
+                    <button 
                       id="tour-goalseek-tab"
                       onClick={() => { playSound('hover'); setActiveTab('goalseek'); }}
-                      className={cn("hidden lg:block sm:flex-none px-6 py-2 rounded-lg text-xs uppercase tracking-widest font-bold transition", 
+                      className={cn("whitespace-nowrap flex-1 sm:flex-none px-6 py-2 rounded-lg text-xs uppercase tracking-widest font-bold transition", 
                         activeTab === 'goalseek' ? "bg-white dark:bg-white/5 dark:text-purple-400 border dark:border-purple-500/30 shadow text-purple-600" : "hover:bg-white/50 dark:hover:bg-white/5 text-gray-500 border border-transparent"
                       )}
                     >
                       Goal Seek
                     </button>
                     <button 
-                      onClick={() => { playSound('hover'); setActiveTab('goalseek'); }}
-                      className={cn("lg:hidden flex-1 sm:flex-none px-6 py-2 rounded-lg text-xs uppercase tracking-widest font-bold transition", 
-                        activeTab === 'goalseek' ? "bg-white dark:bg-white/5 dark:text-purple-400 border dark:border-purple-500/30 shadow text-purple-600" : "hover:bg-white/50 dark:hover:bg-white/5 text-gray-500 border border-transparent"
+                      onClick={() => { playSound('hover'); setActiveTab('fire'); }}
+                      className={cn("whitespace-nowrap flex-1 sm:flex-none px-6 py-2 rounded-lg text-xs uppercase tracking-widest font-bold transition", 
+                        activeTab === 'fire' ? "bg-white dark:bg-white/5 dark:text-orange-400 border dark:border-orange-500/30 shadow text-orange-600" : "hover:bg-white/50 dark:hover:bg-white/5 text-gray-500 border border-transparent"
                       )}
                     >
-                      Goals
+                      F.I.R.E. Targeter
                     </button>
                   </div>
                   
                   <button 
                     onClick={handleSave}
-                    disabled={activeTab === 'goalseek'}
-                    className={cn("w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-black dark:bg-teal-500 text-white dark:text-black rounded-xl text-sm font-bold shadow-lg transition transform", activeTab === 'goalseek' ? "opacity-50 cursor-not-allowed" : "hover:opacity-90 hover:scale-105 active:scale-95 dark:shadow-teal-500/10")}
+                    disabled={activeTab === 'goalseek' || activeTab === 'fire' || activeTab === 'compare'}
+                    className={cn("w-full xl:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-black dark:bg-teal-500 text-white dark:text-black rounded-xl text-sm font-bold shadow-lg transition transform shrink-0", (activeTab === 'goalseek' || activeTab === 'fire' || activeTab === 'compare') ? "opacity-50 cursor-not-allowed" : "hover:opacity-90 hover:scale-105 active:scale-95 dark:shadow-teal-500/10")}
                   >
                     <Save size={16} /> Save Snapshot
                   </button>
@@ -263,6 +288,14 @@ export default function App() {
                   ) : activeTab === 'mp2' ? (
                     <motion.div key="mp2" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }}>
                       <MP2Calc input={mp2Input} setInput={setMp2Input} />
+                    </motion.div>
+                  ) : activeTab === 'compare' ? (
+                    <motion.div key="compare" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
+                      <ComparisonChart />
+                    </motion.div>
+                  ) : activeTab === 'fire' ? (
+                    <motion.div key="fire" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
+                      <FIRETargeter />
                     </motion.div>
                   ) : (
                     <motion.div key="goalseek" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>

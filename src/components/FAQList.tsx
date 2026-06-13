@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronDown, Mail, UserInfo } from 'lucide-react';
+import { ChevronDown, Mail, UserInfo, Search } from 'lucide-react';
 import { playSound } from '../utils/audio';
 
 const investmentFaqs = [
@@ -39,6 +39,8 @@ const websiteFaqs = [
   { question: "Can I save my calculations for later?", answer: "Absolutely! Just click on the 'Save Calculation' button when viewing your projection and it will be stored in your 'Saved' folder." },
   { question: "Is it possible to download my results?", answer: "Yes. From your 'Saved' folder, you can generate and download a clean PDF report of a specific projection, or use the 'Export All to PDF' button to download a single folio containing all your saved calculations." },
   { question: "What is Goal Seek capability?", answer: "Goal-Seek or Reverse Calculation allows you to determine exactly how much you need to deposit today, or continually deposit each month, to reach a target financial goal in the future." },
+  { question: "What is the F.I.R.E. Targeter?", answer: "The F.I.R.E. (Financial Independence, Retire Early) Targeter takes your monthly living expenses and reverse-engineers the exact principal amount you need invested. It shows you the portfolio size required so you can live entirely off your dividends, without ever touching the original capital." },
+  { question: "How does the RTB vs MP2 Comparison Chart work?", answer: "If you have a lump sum of cash, the Comparison Chart tab provides a head-to-head visual showdown. It calculates the compound interest of the MP2 alongside the simple interest payout of an RTB, while explicitly highlighting the exact monetary loss caused by the 20% RTB withholding tax." },
   { question: "What does the Inflation Adjuster do?", answer: "The optional Inflation Adjuster computes your 'Real Return'. It estimates the future purchasing power of your money by subtracting the effects of inflation from your total yield, so you can see if your investments are truly beating the rising costs of goods." },
   { question: "How accurate are the projected returns?", answer: "Our system uses standardized algorithms mimicking real-world computations. However, because actual rates or bank fees may fluctuate, treat these as highly accurate estimates rather than guarantees." },
   { question: "Is AuraWealth an official government site?", answer: "No, we are an independent tool created to assist retail investors and are not officially affiliated with Pag-IBIG or the Bureau of the Treasury." },
@@ -51,13 +53,28 @@ const websiteFaqs = [
 
 export const FAQList: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleToggle = (id: string) => {
     playSound('click');
     setOpenIndex(openIndex === id ? null : id);
   };
 
+  const filteredInvestmentFaqs = investmentFaqs.filter(
+    faq => faq.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
+           faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  
+  const filteredWebsiteFaqs = websiteFaqs.filter(
+    faq => faq.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
+           faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const renderFaqSection = (faqs: {question: string, answer: string}[], prefix: string) => {
+    if (faqs.length === 0) {
+      return <div className="text-sm text-gray-500 py-4 italic">No matching questions found.</div>;
+    }
+
     return (
       <div className="space-y-3 mt-4">
         {faqs.map((faq, index) => {
@@ -101,14 +118,27 @@ export const FAQList: React.FC = () => {
   return (
     <div className="flex flex-col lg:flex-row gap-8">
       <div className="flex-1">
+        <div className="relative mb-8">
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <Search size={20} className="text-gray-400" />
+          </div>
+          <input
+            type="text"
+            className="w-full pl-11 pr-4 py-3 bg-white dark:bg-[#141417] border border-gray-200 dark:border-white/10 rounded-2xl text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition shadow-sm"
+            placeholder="Search FAQs..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+
         <h3 className="text-xl font-bold mb-2">RTBs & MP2 Investments FAQs</h3>
         <p className="text-sm text-gray-500 mb-4">Learn more about the fundamentals of these popular Philippine investments.</p>
-        {renderFaqSection(investmentFaqs, 'inv')}
+        {renderFaqSection(filteredInvestmentFaqs, 'inv')}
         
         <div className="mt-8">
           <h3 className="text-xl font-bold mb-2">Website & Usage FAQs</h3>
           <p className="text-sm text-gray-500 mb-4">Questions about how to use AuraWealth and your privacy.</p>
-          {renderFaqSection(websiteFaqs, 'web')}
+          {renderFaqSection(filteredWebsiteFaqs, 'web')}
         </div>
       </div>
       
