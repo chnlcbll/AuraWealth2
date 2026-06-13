@@ -1,0 +1,6 @@
+{
+  "name": "Yield & Dividend Calculator",
+  "description": "Interactive calculator for exploring Treasury Bonds and Pag-IBIG MP2 yields with charts and data exporting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #0a0a0c;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'><path d='M6 6l11 4.5c1 .4 1 1.9 0 2.3l-4.2 1.6-1.6 4.2c-.4 1-1.9 1-2.3 0L4.5 7.6c-.3-.9.6-1.8 1.5-1.6z' fill='%2314b8a6' stroke='white' stroke-width='1.5' stroke-linejoin='round'/></svg>") 6 6, auto;
+}
+
+a, button, input[type="range"], select, .cursor-pointer {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'><circle cx='12' cy='12' r='4' fill='%2314b8a6'/><circle cx='12' cy='12' r='8' stroke='%2314b8a6' stroke-width='1.5'/></svg>") 12 12, pointer !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Custom styling for driver.js popover to match the theme */
+.driver-popover {
+  border-radius: 1rem !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1) !important;
+  font-family: inherit !important;
+  border: 1px solid rgba(0,0,0,0.05) !important;
+  padding: 1rem !important;
+}
+
+.dark .driver-popover {
+  background-color: #1a1a1e !important;
+  color: white !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+.dark .driver-popover-title {
+  color: white !important;
+  font-weight: bold !important;
+}
+
+.dark .driver-popover-description {
+  color: #9ca3af !important;
+}
+
+.driver-popover-navigation-btns {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+}
+
+.driver-popover-next-btn, 
+.driver-popover-prev-btn, 
+.driver-popover-close-btn {
+  text-shadow: none !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 1rem !important;
+  font-weight: 600 !important;
+}
+
+.driver-popover-close-btn {
+  text-decoration: underline !important;
+  font-size: 0 !important;
+  color: #9ca3af !important;
+  padding: 0.25rem 0.5rem !important;
+  opacity: 0.6 !important;
+  font-weight: normal !important;
+  background: transparent !important;
+  border: none !important;
+  margin-right: 0.25rem !important;
+}
+
+.driver-popover-close-btn::before {
+  content: "skip";
+  font-size: 10px !important;
+  text-transform: lowercase !important;
+}
+
+.driver-popover-close-btn:hover {
+  opacity: 1 !important;
+  background: transparent !important;
+  color: #6b7280 !important;
+}
+
+.dark .driver-popover-close-btn:hover {
+  background: transparent !important;
+  color: #d1d5db !important;
+}
+
+.driver-popover-close-btn svg {
+  display: none !important;
+}
+
+.dark .driver-popover-next-btn {
+  background-color: #14b8a6 !important;
+  color: black !important;
+  border: none !important;
+  font-weight: bold !important;
+}
+
+.dark .driver-popover-next-btn:hover {
+  background-color: #0d9488 !important;
+}
+
+.driver-popover-footer {
+  flex-wrap: wrap !important;
+  gap: 0.5rem !important;
+}
