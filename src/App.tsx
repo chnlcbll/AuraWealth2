@@ -296,6 +296,7 @@ export default function App() {
                         Pag-IBIG MP2
                       </button>
                       <button 
+                        id="tour-compare-tab"
                         onClick={() => { playSound('hover'); setActiveTab('compare'); }}
                         className={cn("whitespace-nowrap snap-start shrink-0 px-6 py-2 rounded-lg text-xs uppercase tracking-widest font-bold transition", 
                           activeTab === 'compare' ? "bg-white dark:bg-white/5 dark:text-indigo-400 border dark:border-indigo-500/30 shadow text-indigo-600" : "hover:bg-white/50 dark:hover:bg-white/5 text-gray-500 border border-transparent"
@@ -313,6 +314,7 @@ export default function App() {
                         Goal Seek
                       </button>
                       <button 
+                        id="tour-fire-tab"
                         onClick={() => { playSound('hover'); setActiveTab('fire'); }}
                         className={cn("whitespace-nowrap snap-start shrink-0 px-6 py-2 rounded-lg text-xs uppercase tracking-widest font-bold transition", 
                           activeTab === 'fire' ? "bg-white dark:bg-white/5 dark:text-orange-400 border dark:border-orange-500/30 shadow text-orange-600" : "hover:bg-white/50 dark:hover:bg-white/5 text-gray-500 border border-transparent"

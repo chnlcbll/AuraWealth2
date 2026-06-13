@@ -5,7 +5,7 @@ import 'driver.js/dist/driver.css';
 interface Props {
   onClose: () => void;
   setAppView: (view: 'dashboard' | 'calculator') => void;
-  setActiveTab: (tab: 'tbond' | 'mp2' | 'goalseek') => void;
+  setActiveTab: (tab: 'tbond' | 'mp2' | 'goalseek' | 'compare' | 'fire') => void;
   switchTheme: () => void;
   setHelpOpen: (open: boolean) => void;
   setSidebarOpen: (open: boolean) => void;
@@ -154,6 +154,18 @@ export const IntroTour: React.FC<Props> = ({ onClose, setAppView, setActiveTab, 
             description: 'Looking to calculate your Pag-IBIG MP2 tax-free compound growth? Here is everything you need including your total principal deposit sum. The Inflation Adjuster is available here too.',
             side: "top", align: 'center',
             onNextClick: () => {
+              callbacksRef.current.setActiveTab('compare');
+              setTimeout(() => tourDriver.moveNext(), 400);
+            }
+          }
+        },
+        {
+          element: '#tour-compare-tab',
+          popover: {
+            title: 'RTB vs MP2 Comparison',
+            description: 'See a side-by-side comparison between RTB and MP2 to decide which asset grows your wealth faster.',
+            side: "bottom", align: 'center',
+            onNextClick: () => {
               callbacksRef.current.setActiveTab('goalseek');
               setTimeout(() => tourDriver.moveNext(), 400);
             }
@@ -164,6 +176,18 @@ export const IntroTour: React.FC<Props> = ({ onClose, setAppView, setActiveTab, 
           popover: {
             title: 'Goal-Seek Calculator',
             description: 'Brand new! Switch to Goal-Seek mode to reverse-engineer your investments. Set a target amount and time horizon, and find out exactly how much you need to deposit.',
+            side: "bottom", align: 'center',
+            onNextClick: () => {
+              callbacksRef.current.setActiveTab('fire');
+              setTimeout(() => tourDriver.moveNext(), 400);
+            }
+          }
+        },
+        {
+          element: '#tour-fire-tab',
+          popover: {
+            title: 'F.I.R.E. Targeter',
+            description: 'Calculate your path to Financial Independence, Retire Early (F.I.R.E.). Find out how much you need to invest to cover your monthly expenses passively.',
             side: "bottom", align: 'center',
             onNextClick: () => {
               callbacksRef.current.setSidebarOpen(true);
