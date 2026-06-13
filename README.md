@@ -5,13 +5,19 @@ AuraWealth is a premium, interactive financial planner and investment companion 
 ## 📸 Preview
 
 ### Dashboard
-![AuraWealth Dashboard](https://drive.google.com/uc?export=view&id=1fPQqEGE2762R2OQm_9oBuJZz4SW9RN0S)
+![AuraWealth Dashboard](https://drive.google.com/uc?export=view&id=1fBcemZ0JkGQ6Kc1FVQ7wBmTbuyN9miF6)
 
 ### Analysis Tab
 ![Analysis Tab](https://drive.google.com/uc?export=view&id=1fj-xgmUaIKvQfwgnurze6RP66cqqubNV)
 
 ### Goal-Seek Tab
 ![Goal-Seek Tab](https://drive.google.com/uc?export=view&id=1PJp4JnSwwYRygW2N0w49Z6hTyi7ZkmcK)
+
+### RTB vs MP2 Tab
+![RTB vs MP2 Tab](https://drive.google.com/uc?export=view&id=1ObuVbmda482yVSipzjvhZreb0wkq7AfE)
+
+### F.I.R.E Targeter Tab
+![F.I.R.E Targeter Tab](https://drive.google.com/uc?export=view&id=1v9hr9hkXo-a6uCAe9pRlm3PjhWYEpNko)
 
 ## ✨ Features
 
