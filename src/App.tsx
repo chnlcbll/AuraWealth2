@@ -15,10 +15,11 @@ import { GoalSeekCalc } from './components/GoalSeekCalc';
 import { FIRETargeter } from './components/FIRETargeter';
 import { ComparisonChart } from './components/ComparisonChart';
 import { FlyingIconsProvider } from './components/FlyingIcons';
+import { ConfirmModal } from './components/ConfirmModal';
 import { generatePDF } from './utils/pdfExport';
 import { playSound, toggleMute, getMuteState } from './utils/audio';
 import { cn } from './utils/cn';
-import { Moon, Sun, HelpCircle, Save, FolderOpen, X, Video, FileQuestion, TrendingUp, Info, LayoutDashboard, Calculator, User, LogOut, Volume2, VolumeX, Target } from 'lucide-react';
+import { Moon, Sun, HelpCircle, Save, FolderOpen, X, Video, FileQuestion, TrendingUp, Info, LayoutDashboard, Calculator, User, LogOut, Volume2, VolumeX, Target, RotateCcw } from 'lucide-react';
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useLocalStorage('is_authenticated', false);
@@ -105,6 +106,28 @@ export default function App() {
     if (darkMode) document.documentElement.classList.add('dark');
     else document.documentElement.classList.remove('dark');
   }, [darkMode]);
+
+  const [showConfirmReset, setShowConfirmReset] = useState(false);
+
+  const handleResetRequest = () => {
+    playSound('hover');
+    setShowConfirmReset(true);
+  };
+
+  const handleConfirmReset = () => {
+    if (activeTab === 'tbond') {
+      setTbondInput({ principal: 100000, rate: 6.25, taxRate: 20, bankFee: 0, bankFeeFrequency: 4, inflationEnabled: false, inflationRate: 4 });
+    } else if (activeTab === 'mp2') {
+      setMp2Input({ principal: 100000, rate: 6.5, payoutType: 'compounded', monthlyContribution: 5000, mode: 'one-time', tenor: 5, inflationEnabled: false, inflationRate: 4 });
+    } else if (activeTab === 'goalseek') {
+      setGoalSeekInput({ targetAmount: 1000000, years: 5, instrument: 'mp2', annualRate: 6.5 });
+    } else if (activeTab === 'fire') {
+      setFireInput({ monthlyExpenses: 30000, instrument: 'mp2', annualRate: 6.5 });
+    } else if (activeTab === 'compare') {
+      setCompareInput({ lumpSum: 500000, years: 5, mp2Rate: 6.5, rtbGrossRate: 6.25 });
+    }
+    setShowConfirmReset(false);
+  };
 
   const handleSave = () => {
     playSound('save');
@@ -300,12 +323,20 @@ export default function App() {
                     </div>
                   </div>
                   
-                  <button 
-                    onClick={handleSave}
-                    className={cn("w-full xl:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-black dark:bg-teal-500 text-white dark:text-black rounded-xl text-sm font-bold shadow-lg transition transform shrink-0 hover:opacity-90 hover:scale-105 active:scale-95 dark:shadow-teal-500/10")}
-                  >
-                    <Save size={16} /> Save Snapshot
-                  </button>
+                  <div className="flex w-full xl:w-auto gap-2">
+                    <button 
+                      onClick={() => handleResetRequest()}
+                      className={cn("flex-1 xl:flex-none flex items-center justify-center gap-2 px-6 py-2.5 bg-gray-200 dark:bg-white/10 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-bold shadow-sm transition transform shrink-0 hover:bg-gray-300 dark:hover:bg-white/20 hover:scale-105 active:scale-95")}
+                    >
+                      <RotateCcw size={16} /> Reset
+                    </button>
+                    <button 
+                      onClick={handleSave}
+                      className={cn("flex-1 xl:flex-none flex items-center justify-center gap-2 px-6 py-2.5 bg-black dark:bg-teal-500 text-white dark:text-black rounded-xl text-sm font-bold shadow-lg transition transform shrink-0 hover:opacity-90 hover:scale-105 active:scale-95 dark:shadow-teal-500/10")}
+                    >
+                      <Save size={16} /> Save Snapshot
+                    </button>
+                  </div>
                 </div>
 
                 <AnimatePresence mode="wait">
@@ -464,6 +495,13 @@ export default function App() {
         )}
       </AnimatePresence>
 
+    <ConfirmModal
+      isOpen={showConfirmReset}
+      title="Reset Calculator"
+      message="Are you sure you want to restore all fields to their original default values? Your unsaved input will be lost."
+      onConfirm={handleConfirmReset}
+      onCancel={() => setShowConfirmReset(false)}
+    />
     </div>
   );
 }
