@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronDown, Mail, UserInfo, Search } from 'lucide-react';
+import { ChevronDown, Mail, Search } from 'lucide-react';
 import { playSound } from '../utils/audio';
 
 const investmentFaqs = [

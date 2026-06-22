@@ -28,7 +28,7 @@ export const IntroTour: React.FC<Props> = ({ onClose, setAppView, setActiveTab, 
       doneBtnText: 'Finish',
       progressText: '{{current}} of {{total}}',
       popoverClass: 'driver-popover-custom',
-      onPopoverRendered: () => {
+      onPopoverRender: () => {
         const popoverEl = document.querySelector('.driver-popover');
         if (!popoverEl) return;
         const closeBtn = popoverEl.querySelector('.driver-popover-close-btn');

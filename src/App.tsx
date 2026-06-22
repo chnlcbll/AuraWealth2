@@ -463,7 +463,9 @@ export default function App() {
                     />
 
                     <div className="bg-[#111113] rounded-2xl overflow-hidden shadow-lg border border-black/20">
-                      <iframe src="https://drive.google.com/file/d/12nxAjoYtxwdqwfmNQmHq0RM7B32WHQIA/preview" className="w-full aspect-video bg-black object-contain border-0" allow="autoplay; fullscreen" />
+                      <div className="relative w-full overflow-hidden" style={{ paddingTop: '56.25%' }}>
+                        <iframe src="https://drive.google.com/file/d/12nxAjoYtxwdqwfmNQmHq0RM7B32WHQIA/preview" className="absolute top-0 left-0 w-full h-full bg-black border-0" allow="autoplay; fullscreen" />
+                      </div>
                       <div className="p-4 bg-white dark:bg-[#1f1f23]">
                         <h4 className="text-gray-800 dark:text-gray-100 font-bold mb-1">Borrowing & Investing: Simple vs Compound</h4>
                         <p className="text-[10px] uppercase tracking-widest font-bold text-teal-600 dark:text-teal-400">GEMATMW review</p>
@@ -471,7 +473,9 @@ export default function App() {
                     </div>
 
                     <div className="bg-[#111113] rounded-2xl overflow-hidden shadow-lg border border-black/20">
-                      <iframe src="https://drive.google.com/file/d/182whi4bTsNRIa8zMy9CfZET3TTtVPMUB/preview" className="w-full aspect-video bg-black object-contain border-0" allow="autoplay; fullscreen" />
+                      <div className="relative w-full overflow-hidden" style={{ paddingTop: '56.25%' }}>
+                        <iframe src="https://drive.google.com/file/d/182whi4bTsNRIa8zMy9CfZET3TTtVPMUB/preview" className="absolute top-0 left-0 w-full h-full bg-black border-0" allow="autoplay; fullscreen" />
+                      </div>
                       <div className="p-4 bg-white dark:bg-[#1f1f23]">
                         <h4 className="text-gray-800 dark:text-gray-100 font-bold mb-1">Stocks vs. RTBs: The True Math</h4>
                         <p className="text-[10px] uppercase tracking-widest font-bold text-teal-600 dark:text-teal-400">GEMATMW review</p>

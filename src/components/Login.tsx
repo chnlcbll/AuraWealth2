@@ -25,7 +25,7 @@ export const Login: React.FC<Props> = ({ onLogin }) => {
         playSound('success');
         onLogin(username);
       } else {
-        playSound('error');
+        playSound('hover');
         setError(true);
         setLoading(false);
       }

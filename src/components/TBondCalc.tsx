@@ -8,8 +8,6 @@ import { AreaChart, Area, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveCo
 
 import { triggerFlyingDollars } from './FlyingIcons';
 
-import { triggerFlyingDollars } from './FlyingIcons';
-
 interface Props {
   input: TBondInput;
   setInput: React.Dispatch<React.SetStateAction<TBondInput>>;
