@@ -46,6 +46,13 @@ a, button, input[type="range"], select, .cursor-pointer {
   font-family: inherit !important;
   border: 1px solid rgba(0,0,0,0.05) !important;
   padding: 1rem !important;
+  z-index: 2147483647 !important;
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+}
+
+.driver-popover * {
+  pointer-events: auto !important;
 }
 
 .dark .driver-popover {
@@ -76,6 +83,16 @@ a, button, input[type="range"], select, .cursor-pointer {
   border-radius: 0.5rem !important;
   padding: 0.5rem 1rem !important;
   font-weight: 600 !important;
+}
+
+@media (max-width: 640px) {
+  .driver-popover-next-btn, 
+  .driver-popover-prev-btn, 
+  .driver-popover-close-btn {
+    padding: 0.75rem 1.25rem !important;
+    min-height: 44px !important;
+    font-size: 1rem !important;
+  }
 }
 
 .driver-popover-close-btn {
