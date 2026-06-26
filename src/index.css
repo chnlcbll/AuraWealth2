@@ -11,11 +11,16 @@
 body {
   font-family: var(--font-sans);
   background-color: #0a0a0c;
-  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'><path d='M6 6l11 4.5c1 .4 1 1.9 0 2.3l-4.2 1.6-1.6 4.2c-.4 1-1.9 1-2.3 0L4.5 7.6c-.3-.9.6-1.8 1.5-1.6z' fill='%2314b8a6' stroke='white' stroke-width='1.5' stroke-linejoin='round'/></svg>") 6 6, auto;
 }
 
-a, button, input[type="range"], select, .cursor-pointer {
-  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'><circle cx='12' cy='12' r='4' fill='%2314b8a6'/><circle cx='12' cy='12' r='8' stroke='%2314b8a6' stroke-width='1.5'/></svg>") 12 12, pointer !important;
+@media (pointer: fine) {
+  body {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'><path d='M6 6l11 4.5c1 .4 1 1.9 0 2.3l-4.2 1.6-1.6 4.2c-.4 1-1.9 1-2.3 0L4.5 7.6c-.3-.9.6-1.8 1.5-1.6z' fill='%2314b8a6' stroke='white' stroke-width='1.5' stroke-linejoin='round'/></svg>") 6 6, auto;
+  }
+
+  a, button, input[type="range"], select, .cursor-pointer {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'><circle cx='12' cy='12' r='4' fill='%2314b8a6'/><circle cx='12' cy='12' r='8' stroke='%2314b8a6' stroke-width='1.5'/></svg>") 12 12, pointer !important;
+  }
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -83,6 +88,7 @@ a, button, input[type="range"], select, .cursor-pointer {
   border-radius: 0.5rem !important;
   padding: 0.5rem 1rem !important;
   font-weight: 600 !important;
+  cursor: pointer !important;
 }
 
 @media (max-width: 640px) {
